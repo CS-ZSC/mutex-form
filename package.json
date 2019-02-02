@@ -1,0 +1,29 @@
+{
+  "name": "mutex-form",
+  "version": "1.0.0",
+  "description": "Mutex Event Registeration System",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cs-zsc/mutex-form.git"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/cs-zsc/mutex-form/issues"
+  },
+  "homepage": "https://github.com/cs-zsc/mutex-form#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-logging": "^1.1.1",
+    "express-mailer": "^0.3.1",
+    "logops": "^2.1.0",
+    "mongodb": "2.2.33"
+  }
+}

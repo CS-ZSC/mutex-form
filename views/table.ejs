@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Unconfirmed list</title>
+
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+
+    <link href="/table/css/bootstrap.css" rel="stylesheet" />
+    <link href="/table/css/fresh-bootstrap-table.css" rel="stylesheet" />
+
+    <!--     Fonts and icons     -->
+    <script src="https://use.fontawesome.com/e0f5f46cf3.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="fresh-table full-color-azure full-screen-table">
+    <!--    Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
+            Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+    -->
+
+        <table id="fresh-table" class="table">
+            <thead>
+                <th data-field="id">ID</th>
+            	<th data-field="name" data-sortable="true">Name</th>
+            	<th data-field="mail" data-sortable="true">Mail</th>
+            	<th data-field="actions">Actions</th>
+            </thead>
+            <tbody>
+							<% for (var i = 0; i < list.length; ++i) { %>
+                <tr>
+                	<td><%=i%></td>
+                	<td><%=list[i].fullname%></td>
+                	<td><%=list[i].email%></td>
+									<td><a rel="tooltip" title="Resend confirmation mail" href="/reconfirm?mail=<%=escape(list[i].email)%>">
+	                    <i class="fa fa-repeat"></i> Resend confirmation mail
+	                </a></td>
+                </tr>
+							<% } %>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+    <script type="text/javascript" src="/table/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/table/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/table/js/bootstrap-table.js"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            full_screen = false,
+            window_height;
+
+        $().ready(function(){
+
+            window_height = $(window).height();
+            table_height = window_height - 20;
+
+
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: true,
+                search: true,
+                //showToggle: true,
+                //showColumns: true,
+                pagination: true,
+                striped: true,
+                sortable: true,
+                height: table_height,
+                pageSize: 50,
+                pageList: [25,50,100],
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                    //do nothing here, we don't want to show the text "showing x of y from..."
+                },
+                formatRecordsPerPage: function(pageNumber){
+                    return pageNumber + " rows visible";
+                },
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+        });
+    </script>
+
+</html>
